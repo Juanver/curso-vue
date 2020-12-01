@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <h1>Soy la vista del HOME</h1>
-    <HolaMundo msg="BIENVENIDO"/>
+    <HolaMundo msg="BIENVENIDO" number="Soy el número 1"/>
   </div>
 </template>
 
