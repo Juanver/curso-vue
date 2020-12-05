@@ -41,6 +41,15 @@
     <div v-else>
       <p>entró al ELSE</p>
     </div>
+    <h5>V-FOR</h5>
+    <div v-for="color in colores" v-bind:key="color">
+      <div v-if="color != 'rojo'">
+        <p>{{color}}</p>
+      </div>
+      <div v-else>
+        <p>No se encontró el color acá</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,6 +69,7 @@ export default {
       show_box: true,
       condicional: 10,
       texto: '',
+      colores: ['rojo', 'azul', 'amarillo', 'verde']
     }
   },
   methods:{
