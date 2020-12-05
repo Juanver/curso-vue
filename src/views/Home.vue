@@ -16,21 +16,30 @@
         <label for="pera">Pera</label>
         <input v-model="fruta_seleccionada" value="naranja" type="radio" id="naranja" name="fruta">
         <label for="naranja">Naranja</label>
-
-       <div>
+        <div>
+          <input v-model="texto" type="text" id="texto" name="texto">
+           <p>{{this.texto}}</p>
+        </div>
+        <div>
           <input v-model="frutas" value="manzana" type="checkbox" id="manzana" name="manzana">
           <label for="manzana">Manzana</label>
           <input v-model="frutas" value="pera" type="checkbox" id="pera" name="pera">
           <label for="pera">Pera</label>
           <input v-model="frutas" value="naranja" type="checkbox" id="naranja" name="naranja">
           <label for="naranja">Naranja</label>
-       </div>
+        </div>
       </form>
       <p>{{this.frutas}}</p>
     </div>
     <button class="btn btn-outline-primary" @click="mostrar">{{ show_box ? 'Ocultar' : 'Mostrar'}}</button>
     <div v-show="show_box">
       <p>Acá me muestro</p>
+    </div>
+    <div v-if="this.texto == 15">
+      <p>entró al IF</p>
+    </div>
+    <div v-else>
+      <p>entró al ELSE</p>
     </div>
   </div>
 </template>
@@ -48,7 +57,9 @@ export default {
       numero:0,
       frutas:[],
       fruta_seleccionada:'',
-      show_box: true
+      show_box: true,
+      condicional: 10,
+      texto: '',
     }
   },
   methods:{
