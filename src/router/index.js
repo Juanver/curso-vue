@@ -23,10 +23,14 @@ const routes = [
     path:'/ejemplo',
     name: 'Ejemplo',
     component: Ejemplo
-  }
+  },
 ]
 
+
 const router = new VueRouter({
+  scrollBehavior(){
+    return {x:0, y:0};
+  },
   mode: 'history',
   base: process.env.BASE_URL,
   routes

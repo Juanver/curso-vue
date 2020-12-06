@@ -7,6 +7,7 @@
       <button class="btn btn-danger" @click="disminuir">Disminuir</button>
       <p>{{ this.numero }}</p>
     </div>
+    <router-link :to="{name:'About'}">About</router-link>
     <div>
       <p>{{this.fruta_seleccionada}}</p>
       <form>
@@ -50,6 +51,7 @@
         <p>No se encontró el color acá</p>
       </div>
     </div>
+    <router-link :to="{name:'About'}">About</router-link>
   </div>
 </template>
 
