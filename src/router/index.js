@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Inicio from '../views/Home.vue'
-import About from '../views/About.vue'
+import About from '../views/Proyecto.vue'
 import Ejemplo from '../views/Ejemplo'
 import Error404 from '../views/Error404'
 Vue.use(VueRouter)
@@ -13,7 +13,7 @@ const routes = [
     component: Inicio
   },
   {
-    path: '/sobre',
+    path: '/proyecto',
     name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
