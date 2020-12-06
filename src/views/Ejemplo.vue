@@ -39,12 +39,11 @@ export default {
             value : []
         }
     },
-    mounted () {
+    async mounted () {
         this.mensaje_mounted = "Acá funciona el mounted"
-        axios.get('https://jsonplaceholder.typicode.com/posts').then(respuesta => {
-            this.value = respuesta.data
-            console.log(this.value)
-        })
+        const {data} = await axios.get('https://jsonplaceholder.typicode.com/posts')
+        this.value = data
+        console.log(this.value)
         
     },
     computed:{
