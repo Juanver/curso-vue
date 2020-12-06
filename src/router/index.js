@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Inicio from '../views/Home.vue'
 import About from '../views/About.vue'
 import Ejemplo from '../views/Ejemplo'
+import Error404 from '../views/Error404'
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
     name: 'Ejemplo',
     component: Ejemplo
   },
+  {
+    path:'*',
+    name:'404',
+    component: Error404
+  }
 ]
 
 
