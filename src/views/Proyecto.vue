@@ -2,23 +2,64 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <form class="row" @submit.prevent="agregarTarea">
-          <div class="col-3">
-            <input class="form-control mb-3" type="text" v-model="nombre" placeholder="Nombre">
-          </div>
-          <div class="col-3">
-            <input class="form-control mb-3" type="text" v-model="codigo" placeholder="Código">
-          </div>
-          <div class="col-3">
-            <input class="form-control mb-3" type="text" v-model="precio" placeholder="Precio">
-          </div>
-          <div class="col-3">
-            <input class="form-control mb-3" type="text" v-model="image" placeholder="Link de imagen">
-          </div>
+        <b-form class="row" @submit.stop.prevent="agregarTarea">
+          <b-form-group class="col-3" id="nombre-group-1" label="Nombre" label-for="nombre">
+            <b-form-input
+              id="nombre"
+              name="nombre"
+              v-model="$v.form.nombre.$model"
+              :state="validateState('nombre')"
+              aria-describedby="input-1-live-feedback"
+            ></b-form-input>
+
+            <b-form-invalid-feedback
+              id="input-1-live-feedback"
+            >Este campo es requerido</b-form-invalid-feedback>
+          </b-form-group>
+          <b-form-group class="col-3" id="codigo-group-1" label="Código" label-for="codigo">
+            <b-form-input
+              id="codigo"
+              name="codigo"
+              v-model="$v.form.codigo.$model"
+              :state="validateState('codigo')"
+              aria-describedby="input-2-live-feedback"
+            ></b-form-input>
+
+            <b-form-invalid-feedback
+              id="input-2-live-feedback"
+            >Este campo es requerido</b-form-invalid-feedback>
+          </b-form-group>
+          <b-form-group class="col-3" id="precio-group-1" label="Precio" label-for="precio">
+            <b-form-input
+              id="precio"
+              name="precio"
+              v-model="$v.form.precio.$model"
+              :state="validateState('precio')"
+              aria-describedby="input-3-live-feedback"
+            ></b-form-input>
+
+            <b-form-invalid-feedback
+              id="input-3-live-feedback"
+            >Este campo es requerido</b-form-invalid-feedback>
+          </b-form-group>
+          <b-form-group class="col-3" id="image-group-1" label="image" label-for="image">
+            <b-form-input
+              id="image"
+              name="image"
+              v-model="$v.form.image.$model"
+              :state="validateState('image')"
+              aria-describedby="input-4-live-feedback"
+            ></b-form-input>
+
+            <b-form-invalid-feedback
+              id="input-4-live-feedback"
+            >Este campo es requerido</b-form-invalid-feedback>
+          </b-form-group>
           <div class="col-12">
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <b-button type="submit" variant="primary">Enviar</b-button>
+            <b-button type="button" variant="success" @click="resetForm">Limpiar</b-button>
           </div>
-        </form>
+        </b-form>
       </div>
     </div>
     <div class="row mt-3">
@@ -60,18 +101,40 @@
 </template>
 <script>
 import axios from 'axios'
+import { validationMixin } from "vuelidate";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
+  mixins: [validationMixin],
   data(){
     return {
-      nombre: '',
-      codigo: '',
-      precio: '',
-      image: '',
+      form: {
+        nombre: '',
+        codigo: '',
+        precio: '',
+        image: '',
+      },
       nueva_tarea: '',
       photos: [],
       productos:[
           
       ]
+    }
+  },
+  validations: {
+    form:{
+      nombre: {
+        required
+      },
+      codigo: {
+        required,
+        minLength: minLength(3)
+      },
+      precio: {
+        required,
+      },
+      image: {
+        required,
+      }
     }
   },
   async mounted(){
@@ -80,17 +143,34 @@ export default {
     console.log(data)
   },
   methods:{
+    validateState(nombre) {
+      const { $dirty, $error } = this.$v.form[nombre];
+      return $dirty ? !$error : null;
+    },
+    resetForm() {
+      this.form = {
+        nombre : null,
+        codigo : null,
+        precio : null,
+        image : null
+      };
+
+      this.$nextTick(() => {
+        this.$v.$reset();
+      });
+    },
     agregarTarea(){
-      this.productos.push({
-        nombre: this.nombre,
-        codigo: this.codigo,
-        precio: this.precio,
-        image: this.image
-      })
-      this.nombre = null
-      this.codigo = null
-      this.precio = null
-      this.image = null
+      this.$v.form.$touch();
+      if (this.$v.form.$anyError) {
+        return;
+      }else{
+        this.productos.push({
+          nombre: this.form.nombre,
+          codigo: this.form.codigo,
+          precio: this.form.precio,
+          image: this.form.image
+        })
+      }
     },
     eliminarTarea(index){
       this.productos.splice(index, 1)

@@ -23,7 +23,8 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "vue": "^2.6.12",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuelidate": "^0.7.6"
   },
   "eslintConfig": {
     "root": true,

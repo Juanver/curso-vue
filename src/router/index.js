@@ -5,6 +5,8 @@ import About from '../views/Proyecto.vue'
 import Ejemplo from '../views/Ejemplo'
 import Error404 from '../views/Error404'
 Vue.use(VueRouter)
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 const routes = [
   {
