@@ -23,6 +23,7 @@
     </div>
     <div class="row mt-3">
       <div class="col-6 border_card">
+        <h5>Tus productos</h5>
         <div class="row">
           <div v-for="(tarea, index) in productos" :key="index" class="col-6 mt-3">
             <div class="card" style="width: 12rem;">
@@ -38,14 +39,17 @@
         </div>
       </div>
       <div class="col-6">
+        <h5>Productos externos</h5>
         <div class="row">
-          <div v-for="photo in photos" :key="photo.id" class="col-6 mt-3">
-            <div class="card" style="width: 12rem;">
-              <img class="card-img-top" :src="photo.url" :alt="photo.url">
-              <div class="card-body">
-                <h6 class="card-title">Id: {{photo.id}}</h6>
-                <p class="card-text">Título: {{ photo.title }}</p>
-                <a href="#" class="btn btn-success">OK</a>
+          <div v-for="photo in photos" :key="photo.id" class="col-6 mt-3" :class=" photo.id < 10 ? 'd-block' : 'd-none'">
+            <div v-if="photo.id > 0 && photo.id < 10">
+              <div class="card" style="width: 12rem;">
+                <img class="card-img-top" :src="photo.url" :alt="photo.url">
+                <div class="card-body">
+                  <h6 class="card-title">Id: {{photo.id}}</h6>
+                  <p class="card-text">Título: {{ photo.title }}</p>
+                  <a href="#" class="btn btn-success">OK</a>
+                </div>
               </div>
             </div>
           </div>
